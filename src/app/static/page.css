@@ -1,0 +1,66 @@
+/* [dev] TODO */
+table {
+    width: 100%;
+}
+
+table td{
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(222, 226, 230);
+}
+
+table th{
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-bottom: 2px solid #dee2e6;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(222, 226, 230);
+}
+
+table th div {
+    margin-bottom: 30px!important;
+}
+
+tbody tr:hover {
+    background: #f5f5f5;
+}
+
+tbody tr:first-child:hover {
+    background: #fff;
+}
+
+A {
+    color: #3e3e3e;
+}
+
+#col1 {
+    width: 5%;
+}
+
+#div1{
+  display: none;
+}
+
+.filter-img:focus {
+    outline: none!important;
+}
+
+#main {
+    display: none;
+}
+
+#add_students{
+    display: none;
+}
+#add_table{
+    display: none;
+}
+#add_groups{
+    display: none;
+}
+
+

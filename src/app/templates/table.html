@@ -1,0 +1,31 @@
+{%- extends "base.html" -%}
+{%- from "macros.jinja" import render_generic_form -%}
+{%- import 'bootstrap/wtf.html' as wtf -%}
+
+{%- block styles -%}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='page.css') }}" rel="stylesheet">
+{%- endblock styles -%}
+
+{%- block app_content -%}
+    <h1>
+        <p>
+            {{ title }}
+        </p>
+    </h1>
+    <table>
+        <tr>
+            {% for column in  table[0] %}
+                <th class="lead"> <b> {{ column }} </b> </th>
+            {% endfor %}
+        </tr>
+        {% for row in table[1:] %}
+            <tr style="cursor: pointer;">
+                {% for column in  row %}
+                    <td class="lead"> {{ column }} </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{%- endblock -%}

@@ -1,0 +1,22 @@
+# temp
+migrations/versions
+
+.pytest_cache/
+__pycache__/
+.vscode/
+.venv/
+logs/
+log/
+
+*$py.class
+*.py[cod]
+*.log
+*.bak
+*.db
+*.json
+*.db.journal
+*.pot
+*.mo
+*.env
+
+*tmp*

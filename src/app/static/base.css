@@ -1,0 +1,36 @@
+nav .dropdown-toggle,
+nav .dropdown-toggle:hover,
+nav .dropdown-toggle:active {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+
+.coins {
+    float: right;
+    font-size: 28px;
+    margin-right: 5px;
+}
+
+.coins:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.coins span {
+    vertical-align: middle;
+}
+
+.lead {
+    font-size: 14pt;
+}
+
+.lead b {
+    font-weight: 500;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 22pt;
+}

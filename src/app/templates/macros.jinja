@@ -1,0 +1,8 @@
+{%- import 'bootstrap/wtf.html' as wtf -%}
+
+{%- macro render_generic_form(form) -%}
+    <div>{# empty space #}</div>
+    <div style="width: 500px;">
+        {{ wtf.quick_form(form, form_type="basic") }}
+    </div>
+{%- endmacro -%}
