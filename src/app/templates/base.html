@@ -35,6 +35,7 @@
         {# Navbar content #}
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+                <!--
                 <li>
                     <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         {{ "Тестовые запросы" }}
@@ -43,6 +44,19 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
                     </ul>
+                </li> -->
+                <li>
+                    <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ "Сложные SELECT'ы" }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{ url_for('queries.top_teams_by_players_amount') }}">{{ "Команды с самым количество игроков" }}</a></li>
+                        <li><a href="{{ url_for('queries.team_wins_count') }}">{{ "Количество побед команд" }}</a></li>
+                        <li><a href="{{ url_for('queries.players_matches') }}">{{ "Количество сыгранных матчей игроками" }}</a></li>
+                        <li><a href="{{ url_for('queries.goals_in_leagues') }}">{{ "Количество забитых голов в лигах" }}</a></li>
+                        <li><a href="{{ url_for('queries.country_mean_player_stats') }}">{{ "Физические характеристики игроков стран" }}</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -50,7 +64,11 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                        <li><a href="{{ url_for('queries.top_highest_players') }}">{{ "Самые высокие игроки" }}</a></li>
+                        <li><a href="{{ url_for('queries.youngest_players_in_league') }}">{{ "Самые молодые игроки" }}</a></li>
+                        <li><a href="{{ url_for('queries.league_players_matches_ratio') }}">{{ "Доля матчей игроков в лиге" }}</a></li>
+                        <li><a href="{{ url_for('queries.team_scored_and_missed_goals') }}">{{ "Статистика забитых и пропущенных голов" }}</a></li>
+                        <li><a href="{{ url_for('queries.league_teams_goals_gap') }}">{{ "Оставание команд в лидерборде лиги" }}</a></li>
                     </ul>
                 </li>
                 <li>
@@ -59,7 +77,11 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                        <li><a href="{{ url_for('queries.team_rating_by_wins') }}">{{ "Рейтинг команд" }}</a></li>
+                        <li><a href="{{ url_for('queries.league_heaviest_players') }}">{{ "Самые тяжелые игроки" }}</a></li>
+                        <li><a href="{{ url_for('queries.league_last_matches') }}">{{ "Последние игры лиги" }}</a></li>
+                        <li><a href="{{ url_for('queries.league_home_goals_stat') }}">{{ "Статистика игр хозяев" }}</a></li>
+                        <li><a href="{{ url_for('queries.league_median_sum_goals') }}">{{ "Медиана забитых голов в лигах" }}</a></li>
                     </ul>
                 </li>
                 <li>

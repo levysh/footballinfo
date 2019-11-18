@@ -122,7 +122,7 @@ def team_wins_count():
         )
     return render_template(
         "input_form.html",
-        title="Запрос 2",
+        title="Количество побед каждой из команд",
         form=form
     )
 
@@ -325,12 +325,12 @@ def league_home_goals_stat():
     if form.validate_on_submit():
         return render_template(
             "table.html",
-            title="Статистика количества забитых голов в домашней командой",
+            title="Статистика количества забитых голов домашней командой",
             table=generate_table_from_query('league_home_goals_stat.sql', form.data)
         )
     return render_template(
         "input_form.html",
-        title="Статистика количества забитых голов в домашней командой",
+        title="Статистика количества забитых голов домашней командой",
         form=form
     )
 

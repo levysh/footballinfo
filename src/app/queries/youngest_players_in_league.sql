@@ -4,7 +4,7 @@ SELECT
     filtered_league.player_name,
     filtered_league.player_birthday,
     filtered_league.league_id,
-    COUNT(player_id) OVER (PARTITION BY filtered_league.league_id ORDER BY filtered_league.player_birthday) AS Older_than
+    COUNT(player_id) OVER (PARTITION BY filtered_league.league_id ORDER BY filtered_league.player_birthday) AS younger_than
 FROM (
          SELECT DISTINCT players."Name"            AS player_name,
                          players."ID"              AS player_id,
@@ -16,6 +16,6 @@ FROM (
          WHERE league_players."LeagueId" = {league_id}
      ) AS filtered_league
 ORDER BY
-    Older_than DESC
+    younger_than DESC
 LIMIT
     {count}
