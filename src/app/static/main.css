@@ -1,0 +1,9 @@
+body {
+    background: url(background.jpg);
+    background-attachment: fixed;
+}
+
+.footer {
+    height: 0px;
+    background-color: #c2c2c2;
+}

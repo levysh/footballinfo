@@ -36,14 +36,49 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="{{ url_for('queries.players') }}">
-                        {{ "Игроки" }}
+                    <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ "Тестовые запросы" }}
+                        <span class="caret"></span>
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="{{ url_for('queries.query_2') }}">
-                        {{ "Запрос 2" }}
+                    <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ "Оконные функции" }}
+                        <span class="caret"></span>
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ "Аналитические функции" }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ "Представления" }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ "Хранимые процедуры" }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

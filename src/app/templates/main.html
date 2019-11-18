@@ -1,0 +1,10 @@
+{%- extends "base.html" -%}
+
+{% block styles -%}
+    {{super()}}
+    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+{% endblock styles %}
+
+{%- block app_content -%}
+    <h1>{{ "Сделай запрос, брат." }}</h1>
+{%- endblock app_content -%}
