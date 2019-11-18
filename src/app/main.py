@@ -1,6 +1,10 @@
 from flask import Blueprint
 from flask import redirect, url_for, render_template
-from app.forms import FootballPlayers
+from app.forms import (
+    FootballPlayers,
+    TopTeamsByPlayersAmount,
+    TeamWinsCount
+)
 from app import db
 
 
@@ -33,6 +37,7 @@ def form():
         form=form
     )
 
+'''
 @bp.route("/query_1", methods=["GET", "POST"])
 def query_1():
     form = FootballPlayers()
@@ -54,3 +59,4 @@ def query_2():
         title="Запрос 2",
         form=form
     )
+'''
