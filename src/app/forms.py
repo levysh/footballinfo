@@ -122,3 +122,54 @@ class LeagueHomeGoalsStat(FlaskForm):
 
 class LeagueMedianSumGoals(FlaskForm):
     submit = SubmitField("Показать", id="submit_button")
+
+
+class ViewTeamsPerCountry(FlaskForm):
+    select = SelectField("Показать всю VIEW или SELECT", choices=[('view', 'VIEW'), ('select', "SELECT")])
+    submit = SubmitField("Показать", id="submit_button")
+
+
+class ViewPlayersLastStatistic(FlaskForm):
+    select = SelectField("Показать всю VIEW или SELECT", choices=[('view', 'VIEW'), ('select', "SELECT")])
+    rating = IntegerField(
+        "Минимальный рейтинг игрока",
+        default=85,
+    )
+    submit = SubmitField("Показать", id="submit_button")
+
+
+class ViewMatchesWithTeamNames(FlaskForm):
+    select = SelectField("Показать всю VIEW или SELECT", choices=[('view', 'VIEW'), ('select', "SELECT")])
+    team = StringField(
+        "Команда",
+        default='FC Barcelona',
+    )
+    submit = SubmitField("Показать", id="submit_button")
+
+
+class ViewAverageMatchPlayersRating(FlaskForm):
+    select = SelectField("Показать всю VIEW или SELECT", choices=[('view', 'VIEW'), ('select', "SELECT")])
+    rating = IntegerField(
+        "Минимальный средний рейтинг игроков матча",
+        default=82,
+    )
+    submit = SubmitField("Показать", id="submit_button")
+
+
+class ViewPlayersLifeAttributes(FlaskForm):
+    select = SelectField("Показать VIEW, сделать UPDATE или показать исходную таблицу",
+                         choices=[('view', 'VIEW'), ('update', "UPDATE"), ("initial", "INITIAL")])
+    height = IntegerField(
+        "Рост (минимальный по которому будет создана VIEW или значение на которое перезаписать в UPDATE)",
+        default=190,
+    )
+    weight = IntegerField(
+        "Максимальный вес (в кг)",
+        default=75,
+    )
+    name = StringField(
+        "Имя игрока",
+        default='Aaron Wilbraham',
+    )
+
+    submit = SubmitField("Показать", id="submit_button")

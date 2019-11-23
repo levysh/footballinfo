@@ -90,7 +90,13 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="{{ url_for('queries.players') }}">{{ "Игроки" }}</a></li>
+                        <li><a href="{{ url_for('queries.view_teams_per_country') }}">{{ "Команды по странам и лигам" }}</a></li>
+                        <li><a href="{{ url_for('queries.view_players_last_statistic') }}">{{ "Основная статистика по игрокам" }}</a></li>
+                        <li><a href="{{ url_for('queries.view_matches_with_team_names') }}">{{ "Сыгранные матчи" }}</a></li>
+                        <li><a href="{{ url_for('queries.view_average_match_players_rating') }}">{{ "Средний рейтинг по матчам" }}</a></li>
+                        <li><a href="{{ url_for('queries.view_players_life_attributes') }}">{{ "Характеристику игроков с определенным весом и ростом" }}</a></li>
+
+
                     </ul>
                 </li>
                 <li>

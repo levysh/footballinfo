@@ -17,7 +17,12 @@ from src.app.forms import (  # in order of adding
     LeagueHeaviestPlayers,
     LeagueLastMatches,
     LeagueHomeGoalsStat,
-    LeagueMedianSumGoals
+    LeagueMedianSumGoals,
+    ViewTeamsPerCountry,
+    ViewPlayersLastStatistic,
+    ViewMatchesWithTeamNames,
+    ViewAverageMatchPlayersRating,
+    ViewPlayersLifeAttributes
 )
 from src.app.routes.queries import bp
 from src.app import db
@@ -350,3 +355,102 @@ def league_median_sum_goals():
         form=form
     )
 
+@bp.route("/view_teams_per_country", methods=["GET", "POST"])
+def view_teams_per_country():
+    form = ViewTeamsPerCountry()
+    if form.validate_on_submit():
+        show_view_only = True if form.data['select'] == 'view' else False
+        sql_path ='view_teams_per_country.sql' if show_view_only else "view_s_teams_per_country.sql"
+        title = '(VIEW) команды по странам и лигам' if show_view_only else 'Количество команд в каждой лиге'
+        return render_template(
+            "table.html",
+            title=title,
+            table=generate_table_from_query(sql_path, form.data)
+        )
+    return render_template(
+        "input_form.html",
+        title="Количество команд в каждой лиге",
+        form=form
+    )
+
+@bp.route("/view_players_last_statistic", methods=["GET", "POST"])
+def view_players_last_statistic():
+    form = ViewPlayersLastStatistic()
+    if form.validate_on_submit():
+        show_view_only = True if form.data['select'] == 'view' else False
+        sql_path ='view_players_last_statistic.sql' if show_view_only else "view_s_players_last_statistic.sql"
+        title = '(VIEW) Основная статистика по игрокам' if show_view_only else 'Статистика по самым топовым игрокам'
+        return render_template(
+            "table.html",
+            title=title,
+            table=generate_table_from_query(sql_path, form.data)
+        )
+    return render_template(
+        "input_form.html",
+        title="Основная статистика по игрокам",
+        form=form
+    )
+
+@bp.route("/view_matches_with_team_names", methods=["GET", "POST"])
+def view_matches_with_team_names():
+    form = ViewMatchesWithTeamNames()
+    if form.validate_on_submit():
+        show_view_only = True if form.data['select'] == 'view' else False
+        sql_path ='view_matches_with_team_names.sql' if show_view_only else "view_s_matches_with_team_names.sql"
+        title = '(VIEW) Сыгранные матчи' if show_view_only else 'Информация по нужной команде'
+        return render_template(
+            "table.html",
+            title=title,
+            table=generate_table_from_query(sql_path, form.data)
+        )
+    return render_template(
+        "input_form.html",
+        title="Сыгранные матчи с результатом",
+        form=form
+    )
+
+@bp.route("/view_average_match_players_rating", methods=["GET", "POST"])
+def view_average_match_players_rating():
+    form = ViewAverageMatchPlayersRating()
+    if form.validate_on_submit():
+        show_view_only = True if form.data['select'] == 'view' else False
+        sql_path ='view_average_match_players_rating.sql' if show_view_only else "view_s_average_match_players_rating.sql"
+        title = '(VIEW) Средний рейтинг по матчам' if show_view_only else 'Матчи с наибольшим рейтингом'
+        return render_template(
+            "table.html",
+            title=title,
+            table=generate_table_from_query(sql_path, form.data)
+        )
+    return render_template(
+        "input_form.html",
+        title="Средний рейтинг по матчам",
+        form=form
+    )
+
+@bp.route("/view_players_life_attributes", methods=["GET", "POST"])
+def view_players_life_attributes():
+    form = ViewPlayersLifeAttributes()
+    if form.validate_on_submit():
+        if form.data['select'] == 'view':
+            return render_template(
+                "table.html",
+                title='(VIEW) Статистика игроков',
+                table=generate_table_from_query("view_players_life_attributes.sql", form.data)
+            )
+        elif form.data['select'] == 'update':
+            return render_template(
+                "table.html",
+                title='Попробовали обновить данные по запросу в VIEW',
+                table=generate_table_from_query("view_update_players_life_attributes.sql", form.data)
+            )
+        elif form.data['select'] == 'initial':
+            return render_template(
+                "table.html",
+                title='Исходная таблица по которой была построена VIEW',
+                table=generate_table_from_query("view_s_init_players_life_attributes.sql", form.data)
+            )
+    return render_template(
+        "input_form.html",
+        title="Средний рейтинг по матчам",
+        form=form
+    )
