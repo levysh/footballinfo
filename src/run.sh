@@ -9,6 +9,7 @@ fi
 source .venv/bin/activate
 
 # Install dependencies
+# pip3 install --user matplotlib==3.1.2
 pip3 install --no-cache -r requirements.txt
 
 # Configure environment variables

@@ -2,6 +2,18 @@
 {%- from "macros.jinja" import render_generic_form -%}
 {%- import 'bootstrap/wtf.html' as wtf -%}
 
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/"></script>
+    <script type="text/javascript">
+        function openModal(event) {
+            $("#сonfirmModalBox").modal('show');
+            event.stopPropagation();
+        };
+    </script>
+{% endblock scripts %}
+
 {%- block styles -%}
     {{ super() }}
     <link href="{{ url_for('static', filename='page.css') }}" rel="stylesheet">
@@ -11,6 +23,9 @@
     <h1>
         <p>
             {{ title }}
+            {% if show_graph %}
+                <img onClick='openModal(event);' src="{{ url_for('static', filename='img.png') }}" height="23" align="right" style="cursor: pointer;">
+            {% endif %}
         </p>
     </h1>
     <table>
@@ -27,5 +42,22 @@
             </tr>
         {% endfor %}
     </table>
+
+    <div id="сonfirmModalBox" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title"> График </h4>
+            </div>
+            <div class="modal-body">
+                <img src="{{ url_for('static', filename='graph.png') }}" alt="альтернативный текст">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal"> ок </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 {%- endblock -%}

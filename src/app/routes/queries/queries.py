@@ -1,4 +1,6 @@
 import os
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 from src.app.forms import (  # in order of adding
     FootballPlayers,
@@ -42,6 +44,22 @@ def generate_table_from_query(query_name, query_args):
         values.append([value for _, value in rowproxy.items()])
     values[0] = columns
     return values
+
+
+def generate_new_graph():
+    dpi = 80
+    fig = plt.figure(dpi = dpi, figsize = (512 / dpi, 384 / dpi) )
+    mpl.rcParams.update({'font.size': 10})
+
+    plt.axis([0, 100, 0, 80])
+
+    plt.title('a')
+    plt.xlabel('a')
+    plt.ylabel('a')
+
+    plt.legend(loc = 'upper right')
+    fig.savefig(os.path.join(current_app.config['IMAGES_PATH'], 'graph.png'))
+    return "ok"
 
 
 @bp.route("/ping")
@@ -246,12 +264,14 @@ def league_players_matches_ratio():
 
 @bp.route("/team_scored_and_missed_goals", methods=["GET", "POST"])
 def team_scored_and_missed_goals():
+    generate_new_graph()
     form = TeamScoredAndMissedGoals()
     if form.validate_on_submit():
         return render_template(
             "table.html",
             title="Количество забитых и пропущенных голов каждой из команд",
-            table=generate_table_from_query('team_scored_and_missed_goals.sql', form.data)
+            table=generate_table_from_query('team_scored_and_missed_goals.sql', form.data),
+            show_graph=True
         )
     return render_template(
         "input_form.html",

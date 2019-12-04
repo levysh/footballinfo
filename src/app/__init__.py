@@ -15,6 +15,7 @@ def create_app():
     app.url_map.strict_slashes = False
     app.config.from_object(Config)
     app.config['QUERIES_PATH'] = os.path.join(BASE_DIR, 'queries')
+    app.config['IMAGES_PATH'] = os.path.join(BASE_DIR, 'static')
 
     from src.app.routes import queries_bp, main_bp
     app.register_blueprint(queries_bp)
