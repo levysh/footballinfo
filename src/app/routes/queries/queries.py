@@ -46,16 +46,19 @@ def generate_table_from_query(query_name, query_args):
     return values
 
 
-def generate_new_graph():
+def generate_new_graph(values):
+    mpl.use('agg')
     dpi = 80
     fig = plt.figure(dpi = dpi, figsize = (512 / dpi, 384 / dpi) )
     mpl.rcParams.update({'font.size': 10})
 
-    plt.axis([0, 100, 0, 80])
+    plt.axis([0, 54000, 0, 150])
 
-    plt.title('a')
-    plt.xlabel('a')
-    plt.ylabel('a')
+    plt.title('Статистика голов')
+    plt.xlabel('Команды')
+    plt.ylabel('Голы')
+
+    plt.hist([int(row[1]) for row in values[1:]])
 
     plt.legend(loc = 'upper right')
     fig.savefig(os.path.join(current_app.config['IMAGES_PATH'], 'graph.png'))
@@ -264,9 +267,10 @@ def league_players_matches_ratio():
 
 @bp.route("/team_scored_and_missed_goals", methods=["GET", "POST"])
 def team_scored_and_missed_goals():
-    generate_new_graph()
     form = TeamScoredAndMissedGoals()
     if form.validate_on_submit():
+        values = generate_table_from_query('team_scored_and_missed_goals.sql', form.data)
+        generate_new_graph(values)
         return render_template(
             "table.html",
             title="Количество забитых и пропущенных голов каждой из команд",
