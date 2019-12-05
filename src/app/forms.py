@@ -173,3 +173,21 @@ class ViewPlayersLifeAttributes(FlaskForm):
     )
 
     submit = SubmitField("Показать", id="submit_button")
+
+
+class CreateNewPlayer(FlaskForm):
+    name = StringField(
+        'Имя игрока'
+    )
+    birthday = StringField(
+        'Дата рождения',
+        default='2012-01-01', description='в формате YYYY-MM-DD'
+    )
+    weight = FloatField(
+        'Вес игрока'
+    )
+    height = FloatField(
+        'Рост игрока'
+    )
+
+    submit = SubmitField('Добавить', id='add_button')

@@ -1,6 +1,7 @@
 import os
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from sqlalchemy.dialects.postgresql.psycopg2 import exc
 
 from src.app.forms import (  # in order of adding
     FootballPlayers,
@@ -24,7 +25,8 @@ from src.app.forms import (  # in order of adding
     ViewPlayersLastStatistic,
     ViewMatchesWithTeamNames,
     ViewAverageMatchPlayersRating,
-    ViewPlayersLifeAttributes
+    ViewPlayersLifeAttributes,
+    CreateNewPlayer
 )
 from src.app.routes.queries import bp
 from src.app import db
@@ -54,13 +56,13 @@ def generate_new_graph(values):
 
     plt.axis([0, 54000, 0, 150])
 
-    plt.title('Статистика голов')
-    plt.xlabel('Команды')
-    plt.ylabel('Голы')
+    plt.title('Гистограмма распределения забитых и пропущенных голов')
+    plt.xlabel('Количество забитых голов')
+    plt.ylabel('Количество команд')
 
-    plt.hist([int(row[1]) for row in values[1:]])
-
-    plt.legend(loc = 'upper right')
+    plt.hist([int(row[1]) for row in values[1:]], bins=20, label='Забитые', alpha=0.5)
+    plt.hist([int(row[2]) for row in values[1:]], bins=20, label='Пропущенные', alpha=0.5)
+    plt.legend(loc='best')
     fig.savefig(os.path.join(current_app.config['IMAGES_PATH'], 'graph.png'))
     return "ok"
 
@@ -476,5 +478,28 @@ def view_players_life_attributes():
     return render_template(
         "input_form.html",
         title="Средний рейтинг по матчам",
+        form=form
+    )
+
+
+@bp.route('/add_new_player', methods=['GET', 'POST'])
+def add_new_player():
+    form = CreateNewPlayer()
+    if form.validate_on_submit():
+        try:
+            return render_template(
+                "table.html",
+                title='Результат запроса',
+                table=generate_table_from_query("add_player.sql", form.data)
+            )
+        except exc.IntegrityError as e:
+            msg = """Упс, какие то данные несоответствуют ограничениям базы."""\
+                  """ Полная ошибка (находится здесь только в демонстрационных целях): {err_msg}"""
+            msg = msg.format(err_msg=e._message())
+            return msg
+
+    return render_template(
+        "input_form.html",
+        title="Добавить нового игрока",
         form=form
     )
