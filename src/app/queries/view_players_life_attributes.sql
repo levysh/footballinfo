@@ -9,6 +9,5 @@ CREATE OR REPLACE VIEW "players_life_attributes" AS (
 ) WITH CASCADED CHECK OPTION;
 
 SELECT * from players_life_attributes
+ORDER BY "Height", "Weight"
 LIMIT 100;
-
--- UPDATE players_life_attributes SET "Height"={height} WHERE "Name"='{name}';

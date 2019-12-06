@@ -26,7 +26,8 @@ from src.app.forms import (  # in order of adding
     ViewMatchesWithTeamNames,
     ViewAverageMatchPlayersRating,
     ViewPlayersLifeAttributes,
-    CreateNewPlayer
+    CreateNewPlayer,
+    ChangePlayer,
 )
 from src.app.routes.queries import bp
 from src.app import db
@@ -457,30 +458,16 @@ def view_average_match_players_rating():
 def view_players_life_attributes():
     form = ViewPlayersLifeAttributes()
     if form.validate_on_submit():
-        if form.data['select'] == 'view':
-            return render_template(
-                "table.html",
-                title='(VIEW) Статистика игроков',
-                table=generate_table_from_query("view_players_life_attributes.sql", form.data)
-            )
-        elif form.data['select'] == 'update':
-            return render_template(
-                "table.html",
-                title='Попробовали обновить данные по запросу в VIEW',
-                table=generate_table_from_query("view_update_players_life_attributes.sql", form.data)
-            )
-        elif form.data['select'] == 'initial':
-            return render_template(
-                "table.html",
-                title='Исходная таблица по которой была построена VIEW',
-                table=generate_table_from_query("view_s_init_players_life_attributes.sql", form.data)
-            )
+        return render_template(
+            "table.html",
+            title='(VIEW) Статистика игроков',
+            table=generate_table_from_query("view_players_life_attributes.sql", form.data)
+        )
     return render_template(
         "input_form.html",
-        title="Средний рейтинг по матчам",
+        title="Статистика игроков",
         form=form
     )
-
 
 @bp.route('/add_new_player', methods=['GET', 'POST'])
 def add_new_player():
@@ -489,7 +476,7 @@ def add_new_player():
         try:
             return render_template(
                 "table.html",
-                title='Результат запроса',
+                title='Добавленный игрок',
                 table=generate_table_from_query("add_player.sql", form.data)
             )
         except exc.IntegrityError as e:
@@ -501,5 +488,30 @@ def add_new_player():
     return render_template(
         "input_form.html",
         title="Добавить нового игрока",
+        form=form
+    )
+
+
+@bp.route('/change_player', methods=['GET', 'POST'])
+def change_player():
+    form = ChangePlayer()
+    if form.validate_on_submit():
+        try:
+            if form.data['delete']:
+                generate_table_from_query("delete_player_league.sql", form.data)
+            return render_template(
+                "table.html",
+                title='Последние данные по игроку и лигах, в которох он играл',
+                table=generate_table_from_query("change_player.sql", form.data)
+            )
+        except exc.IntegrityError as e:
+            msg = """Упс, какие то данные несоответствуют ограничениям базы."""\
+                  """ Полная ошибка (находится здесь только в демонстрационных целях): {err_msg}"""
+            msg = msg.format(err_msg=e._message())
+            return msg
+
+    return render_template(
+        "input_form.html",
+        title="Изменить игрока",
         form=form
     )

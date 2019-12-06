@@ -157,22 +157,16 @@ class ViewAverageMatchPlayersRating(FlaskForm):
 
 
 class ViewPlayersLifeAttributes(FlaskForm):
-    select = SelectField("Показать VIEW, сделать UPDATE или показать исходную таблицу",
-                         choices=[('view', 'VIEW'), ('update', "UPDATE"), ("initial", "INITIAL")])
     height = IntegerField(
-        "Рост (минимальный по которому будет создана VIEW или значение на которое перезаписать в UPDATE)",
+        "Рост (минимальный по которому будет создана VIEW)",
         default=190,
     )
     weight = IntegerField(
         "Максимальный вес (в кг)",
         default=75,
     )
-    name = StringField(
-        "Имя игрока",
-        default='Aaron Wilbraham',
-    )
 
-    submit = SubmitField("Показать", id="submit_button")
+    submit = SubmitField("Показать VIEW", id="submit_button")
 
 
 class CreateNewPlayer(FlaskForm):
@@ -183,11 +177,82 @@ class CreateNewPlayer(FlaskForm):
         'Дата рождения',
         default='2012-01-01', description='в формате YYYY-MM-DD'
     )
-    weight = FloatField(
-        'Вес игрока'
-    )
     height = FloatField(
         'Рост игрока'
+    )
+    weight = IntegerField(
+        'Вес игрока', description='В килограммах, целое число'
+    )
+    rating = IntegerField(
+        'Общий рейтинг игрока', description='От 0 до 100',
+        default=70
+    )
+    potential = IntegerField(
+        'Потенциал игрока', description='От 0 до 100',
+        default=75
+    )
+    balance = IntegerField(
+        'Показатель сбалансированности игрока', description='От 0 до 100',
+        default=72
+    )
+    country = SelectField(
+        "Страна рождения", choices=[
+            ('Belgium', 'Belgium'),
+            ("France", "France"),
+            ("Germany", "Germany"),
+            ("England", "England"),
+            ("Italy", "Italy"),
+            ("Netherlands", "Netherlands"),
+            ("Poland", "Poland"),
+            ("Portugal", "Portugal"),
+            ("Scotland", "Scotland"),
+            ("Spain", "Spain"),
+            ("Switzerland", "Switzerland"),
+        ]
+    )
+
+    submit = SubmitField('Добавить', id='add_button')
+
+
+class ChangePlayer(FlaskForm):
+    name = StringField(
+        'Имя игрока'
+    )
+    height = FloatField(
+        'Новый рост игрока'
+    )
+    weight = IntegerField(
+        'Новый вес игрока', description='В килограммах, целое число'
+    )
+    rating = IntegerField(
+        'Новый общий рейтинг игрока', description='От 0 до 100',
+        default=70
+    )
+    potential = IntegerField(
+        'Новый потенциал игрока', description='От 0 до 100',
+        default=75
+    )
+    balance = IntegerField(
+        'Новый показатель сбалансированности игрока', description='От 0 до 100',
+        default=72
+    )
+    league = SelectField(
+        "Новая лига", choices=[
+            ('Belgium Jupiler League', 'Belgium Jupiler League'),
+            ("England Premier League", "England Premier League"),
+            ("France Ligue 1", "France Ligue 1"),
+            ("Germany 1. Bundesliga", "Germany 1. Bundesliga"),
+            ("Italy Serie A", "Italy Serie A"),
+            ("Netherlands Eredivisie", "Netherlands Eredivisie"),
+            ("Poland Ekstraklasa", "Poland Ekstraklasa"),
+            ("Portugal Liga ZON Sagres", "Portugal Liga ZON Sagres"),
+            ("Scotland Premier League", "Scotland Premier League"),
+            ("Spain LIGA BBVA", "Spain LIGA BBVA"),
+            ("Switzerland Super League", "Switzerland Super League"),
+        ]
+    )
+    delete = BooleanField(
+        "Удалить старые записи о лигах"
     )
 
     submit = SubmitField('Добавить', id='add_button')

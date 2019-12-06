@@ -11,6 +11,6 @@
 -- SELECT * from players_life_attributes
 -- LIMIT 100;
 
-UPDATE players_life_attributes SET "Height"={height} WHERE "Name"='{name}';
+UPDATE players_life_attributes SET "Height"={height}, "Weight"={weight} * 2.2 WHERE "Name"='{name}';
 COMMIT;
 SELECT * from players_life_attributes WHERE "Name"='{name}';
